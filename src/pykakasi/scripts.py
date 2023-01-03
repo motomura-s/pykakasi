@@ -32,6 +32,7 @@ class IConv:
             "hepburn": self._s2a(self._h2ah(hira)),
             "kunrei": self._s2a(self._h2ak(hira)),
             "passport": self._s2a(self._h2ap(hira)),
+            "phoneme": self._h2p(hira)
         }
         return tmp
 
@@ -127,6 +128,26 @@ class IConv:
                 i += 1
         return result
 
+    def _h2p(self, text: str) -> str:
+        result = []
+        i = 0
+        while i < len(text):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hahconv.convert(text[i:w])
+            if l1 > 0:
+                if len(t) > 2 and t[0] == t[1]: # 促音
+                  result.append("Q")
+                  t = t[1:]
+                t = [s for s in re.sub("([aoiue])", ",\\1", t).split(",") if s != ""]
+                result += t
+                i += l1
+            elif t in Ch.long_symbols and len(result) > 0: # 長音符の場合前の最後の文字
+                result.append(result[-1][-1])
+                i += 1
+            else:
+                result.append(text[i : i + 1])
+                i += 1
+        return result    
 
 class H2:
 
