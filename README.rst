@@ -42,6 +42,26 @@ Its algorithms are based on the `kakasi`_ library, which is written in C.
 .. _`kakasi`: http://kakasi.namazu.org/
 .. _`Documentation available on readthedocs`: https://pykakasi.readthedocs.io/en/latest/index.html
 
+Usage
+--------------
+
+.. code-block:: python
+
+   import pykakasi
+   
+   kakasi = pykakasi.kakasi()
+   kakasi.convert("かつかつ")
+   
+   #=>
+   [{'orig': 'かつかつ',
+     'hira': 'かつかつ',
+     'kana': 'カツカツ',
+     'hepburn': 'katsukatsu',
+     'kunrei': 'katukatu',
+     'passport': 'katsukatsu',
+     'phoneme': ['k', 'a', 'ts', 'u', 'k', 'a', 'ts', 'u']}]
+
+
 Give Up GitHub
 --------------
 
