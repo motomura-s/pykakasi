@@ -5,6 +5,7 @@
 import functools
 import pickle
 from typing import Dict
+import re
 
 from .properties import Ch, Configurations, Convert_Tables
 
